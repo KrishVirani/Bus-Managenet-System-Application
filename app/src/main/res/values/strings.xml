@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Bus-App-Go-Bus</string>
+
+    <string-array name="bus_type">
+        <item>AC</item>
+        <item>Non-AC</item>
+        <item>Sleeper</item>
+        <item>Semi-Sleeper</item>
+    </string-array>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2F2E41</color> <!-- Dark Blue/Gray for primary elements -->
+    <color name="colorPrimaryDark">#3F3D56</color> <!-- Dark Gray for status bar -->
+    <color name="colorAccent">#F9A826</color> <!-- Yellow for accent (buttons) -->
+    <color name="colorBackground">#FFFFFF</color> <!-- White background -->
+    <color name="textColorPrimary">#3F3D56</color> <!-- Dark Gray text -->
+    <color name="textColorSecondary">#E5E5E5</color> <!-- Light Gray text -->
+    <color name="inputBackground">#E5E5E5</color> <!-- Light Gray for input fields -->
+</resources>
