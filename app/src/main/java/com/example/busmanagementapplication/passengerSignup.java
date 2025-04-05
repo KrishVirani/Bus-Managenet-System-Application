@@ -139,6 +139,7 @@ public class passengerSignup extends AppCompatActivity {
                 //Validate password
                 if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{6,}$")) {
                     Toast.makeText(passengerSignup.this,"Password must have 1 uppercase, 1 lowercase, 1 digit, 1 special character, and be at least 6 characters long!",Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 if (!phone.matches("\\d{10}")) {

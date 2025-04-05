@@ -7,4 +7,17 @@
         <item>Sleeper</item>
         <item>Semi-Sleeper</item>
     </string-array>
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Conductor drawer font color or size
+
+    <style name="ConductorDrawer">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item> <!-- Increase font size -->
+        <item name="android:textColor">@android:color/white
+        </item> <!-- Optional: Change text color -->
+    </style>
 </resources>
