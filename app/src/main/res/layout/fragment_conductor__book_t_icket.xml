@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Conductor_BookTIcketFragment">
+
+    <AutoCompleteTextView
+        android:id="@+id/txtBus"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="136dp"
+        android:background="@drawable/yellow_border"
+        android:hint="Enter Bus Name"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/lblSeats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Number of Seats"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAdult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBus"
+        tools:ignore="MissingConstraints" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtDestination"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/yellow_border"
+        android:hint="Enter Destination Station Name"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSource" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtSource"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/yellow_border"
+        android:hint="Enter Source Station Name"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChild"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txtAdult"
+        android:layout_width="97dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/yellow_border"
+        android:ems="10"
+        android:hint="Adults"
+        android:inputType="number"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtSource"
+        app:layout_constraintStart_toEndOf="@+id/txtChild"
+        app:layout_constraintTop_toBottomOf="@+id/txtBus"
+        app:layout_constraintVertical_bias="0.63"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txtSenior"
+        android:layout_width="120dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/yellow_border"
+        android:ems="10"
+        android:hint="Senio Citizen"
+        android:inputType="number"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtSource"
+        app:layout_constraintStart_toEndOf="@+id/txtAdult"
+        app:layout_constraintTop_toBottomOf="@+id/txtBus"
+        app:layout_constraintVertical_bias="0.653"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txtChild"
+        android:layout_width="97dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="276dp"
+        android:background="@drawable/yellow_border"
+        android:ems="10"
+        android:hint="Childs"
+        android:inputType="number"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBus" />
+
+
+    <EditText
+        android:id="@+id/edtContactNumber"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/yellow_border"
+        android:ems="10"
+        android:hint="Enter Contact Number"
+        android:inputType="phone"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textColorHint="#B0B0B0"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDestination" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="337dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#F9A826"
+        android:onClick="login"
+        android:text="Submit"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtContactNumber"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

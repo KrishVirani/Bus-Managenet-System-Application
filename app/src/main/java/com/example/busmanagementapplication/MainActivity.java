@@ -1,6 +1,7 @@
 package com.example.busmanagementapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+//Change from priyanshi
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -29,14 +30,21 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user != null) {
-            String userId = user.getUid();
-            // Proceed with using the userId
-        } else {
-            // Handle the case where the user is not signed in
-            Toast.makeText(this, "User not signed in", Toast.LENGTH_SHORT).show();
-        }
+//        if (user != null) {
+//            String userId = user.getUid();
+//            // Proceed with using the userId
+//        } else {
+//            // Handle the case where the user is not signed in
+//            Toast.makeText(this, "User not signed in", Toast.LENGTH_SHORT).show();
+//        }
 
+        //if Email is on Loginpref the then move to conductor dashbord
+        SharedPreferences pref=getSharedPreferences("LoginPref",MODE_PRIVATE);
+        if (pref.contains("Email"))
+        {
+            Intent intent=new Intent(MainActivity.this,Counductor_DrawerActivity.class);
+            startActivity(intent);
+        }
     }
     public void signup(View view) {
 

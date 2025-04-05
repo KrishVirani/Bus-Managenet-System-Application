@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_Home"
+        android:title="Home"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/nav_book_ticket"
+        android:title="Book Ticket"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/booking_ticket"/>
+    <item
+        android:id="@+id/nav_view_bookings"
+        android:title="View Bookings"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/view_booking"/>
+    <item
+        android:id="@+id/nav_cancel_ticket"
+        android:title="Cancel Ticket"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/cancel_ticket"/>
+    <item
+        android:id="@+id/nav_live_location"
+        android:title="Update Live Location"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/live_location"/>
+    <item
+        android:id="@+id/nav_fare_calculator"
+        android:title="Fare Calculator"
+        android:icon="@drawable/fare_calculation"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:title=" Logout"
+        app:titleTextAppearance="@style/ConductorDrawer"
+        android:icon="@drawable/logout"/>
+    </group>
+</menu>
