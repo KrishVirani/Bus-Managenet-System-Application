@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_bookings"
+        android:icon="@drawable/bookings"
+        android:title="Bookings"/>
+
+    <item
+        android:id="@+id/nav_livelocation"
+        android:icon="@drawable/location"
+        android:title="Live Location" />
+
+    <item
+        android:id="@+id/nav_myaccount"
+        android:icon="@drawable/myaccount"
+        android:title="My Account" />
+
+</menu>

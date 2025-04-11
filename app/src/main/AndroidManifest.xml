@@ -10,34 +10,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BusAppGoBus"
+        android:theme="@style/Theme.BusManagermentApplicationFinal"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".passenger.PassangerDashbord"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".Conductor_BookTicketActivity"
+            android:name=".passenger.PassengerBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".Conductor_ViewBookingActivity"
+            android:name=".driver.DriverDashbord"
             android:exported="false" />
         <activity
-            android:name=".Conductor_HomeActivity"
+            android:name=".driver.DriverBaseActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".conductor.ConductorDashbord" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".conductor.ConductorBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".Counductor_DrawerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ConductorDashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ConductorDashboard"
-            android:exported="false" />
-        <activity
-            android:name=".login_form"
-            android:exported="false" />
-        <activity
-            android:name=".passengerSignup"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".passenger.PassangerDashbord"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
