@@ -2,17 +2,23 @@ package com.example.busmanagermentapplicationfinal.passenger;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.busmanagermentapplicationfinal.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -34,6 +40,7 @@ public class Livelocation extends AppCompatActivity {
 
     private LinearLayout loaderContainer;
     boolean mapload = false;
+    String busId, busName, plateNumber;
 
     private List<Marker> busMarkers = new ArrayList<>();
 
@@ -71,9 +78,34 @@ public class Livelocation extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        busId = getIntent().getStringExtra("busId");
+        busName = getIntent().getStringExtra("busName");
+        plateNumber = getIntent().getStringExtra("plateNumber");
+
+//        showUserLocationOnMap();
         // Start fetching location every 5 seconds
         handler.postDelayed(locationUpdateRunnable, UPDATE_INTERVAL);
     }
+//    @SuppressLint("MissingPermission")
+//    private void showUserLocationOnMap() {
+//        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        fusedLocationClient.getLastLocation()
+//                .addOnSuccessListener(location -> {
+//                    if (location != null) {
+//                        double latitude = location.getLatitude();
+//                        double longitude = location.getLongitude();
+//
+//                        GeoPoint userPoint = new GeoPoint(latitude, longitude);
+//                        Marker userMarker = new Marker(mapView);
+//                        userMarker.setPosition(userPoint);
+//                        userMarker.setTitle("You are here");
+//                        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+//                        mapView.getOverlays().add(userMarker);
+//                        mapView.getController().animateTo(userPoint);
+//                        mapView.invalidate();
+//                    }
+//                });
+//    }
 
     private final Runnable locationUpdateRunnable = new Runnable() {
         @Override
@@ -85,7 +117,9 @@ public class Livelocation extends AppCompatActivity {
 
     private void fetchBusLocationsAndDisplay() {
 
-        db.collection("bus_locations").get()
+        db.collection("bus_locations")
+                .whereEqualTo("busId", db.document("Bus_Details/" + busId))
+                .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (mapload == false) {
                         mapView.setVisibility(View.VISIBLE);  // show map
@@ -107,11 +141,20 @@ public class Livelocation extends AppCompatActivity {
                             mapView.getController().setZoom(17);
                             mapView.setMaxZoomLevel(22.0);
 
+                            Drawable icon = ContextCompat.getDrawable(this, R.drawable.busstation);
+                            icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+
+                            Bitmap bitmap = ((BitmapDrawable) icon).getBitmap();
+                            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 50, 50, false);
+                            Drawable iconedited = new BitmapDrawable(getResources(), scaledBitmap);
+
                             GeoPoint busLocation = new GeoPoint(geoPoint.getLatitude(), geoPoint.getLongitude());
                             Marker busMarker = new Marker(mapView);
                             busMarker.setPosition(busLocation);
+                            busMarker.setIcon(iconedited);
+
                             busMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-                            busMarker.setTitle("Your Bus is Here (ID: " + document.getId() + ")");
+                            busMarker.setTitle("Your Bus is Here \nName: " + busName + " \n Plate Number: " + plateNumber + "");
 
                             // Optional: Use custom bus icon
                             // busMarker.setIcon(getResources().getDrawable(R.drawable.bus_icon));

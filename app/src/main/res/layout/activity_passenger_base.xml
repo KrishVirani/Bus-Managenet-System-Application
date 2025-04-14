@@ -14,7 +14,7 @@
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Passenger Dashboard"
+            android:text="Passenger"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:gravity="center"

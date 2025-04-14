@@ -37,6 +37,9 @@ public class view_passenger_Booking extends PassengerBaseActivity {
         setContentLayout(R.layout.activity_view_passenger_booking);
         toolbarTitle.setText("Passenger Booking");
         backButton = findViewById(R.id.btnbck);
+        setSelectedItem(R.id.nav_bookings);
+
+//        bottomNavigationView.setSelectedItemId(R.id.nav_bookings);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

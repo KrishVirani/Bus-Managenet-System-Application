@@ -20,9 +20,12 @@
         <activity
             android:name=".passenger.Live_Location_BusList"
             android:exported="false" />
-        <!-- <activity -->
-        <!-- android:name=".passenger.Livelocation" -->
-        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".passenger.Livelocation"
+            android:exported="false" />
+<!--         <activity-->
+<!--         android:name=".passenger.PassangerDashbord"-->
+<!--         android:exported="false" />-->
         <!-- <activity -->
         <!-- android:name=".passenger.PassangerDashbord" -->
         <!-- android:exported="false" /> -->
@@ -62,9 +65,10 @@
             android:exported="false" />
         <activity
             android:name=".SignUpPage"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".passenger.HomePage" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
+<!--         <activity-->
+<!--         android:name=".passenger.HomePage"-->
+<!--         android:exported="false" />-->
         <activity
             android:name=".passenger.BusSearchPage"
             android:exported="false" />
@@ -78,7 +82,7 @@
             android:name=".passenger.view_passenger_Booking"
             android:exported="false" />
         <activity
-            android:name=".passenger.PassangerDashbord"
+            android:name=".passenger.EditProfile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

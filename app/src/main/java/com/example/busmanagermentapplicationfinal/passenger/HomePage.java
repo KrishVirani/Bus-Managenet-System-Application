@@ -46,6 +46,7 @@ public class HomePage extends PassengerBaseActivity {
 
         setContentLayout(R.layout.activity_home_page);
         toolbarTitle.setText("Passenger Dashboard");
+//        bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
         fromEditText = findViewById(R.id.fromEditTextId);
         toEditText = findViewById(R.id.toEditTextId);
