@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.busmanagermentapplicationfinal.LoginActivity;
 import com.example.busmanagermentapplicationfinal.R;
 import com.example.busmanagermentapplicationfinal.conductor.ConductorDashbord;
 import com.google.android.material.navigation.NavigationView;
@@ -66,8 +67,16 @@ public class DriverBaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ConductorDashbord.class));
             }
             else if (id == R.id.nav_bus_schedule) {
-//                startActivity(new Intent(this, AddPassengerActivity.class));
+                startActivity(new Intent(this, Driver_Checkschedule.class));
             }
+            else if (id == R.id.nav_Emargency_alert) {
+                startActivity(new Intent(this, driver_create_emergency_alert.class));
+            }
+            else if (id == R.id.nav_logout) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+            }
+
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });

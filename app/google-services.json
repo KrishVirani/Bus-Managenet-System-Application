@@ -46,9 +46,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:880433984040:android:6f9f4ad7f7ae470fc37b1d",
+        "mobilesdk_app_id": "1:880433984040:android:c0e97aa08447773bc37b1d",
         "android_client_info": {
-          "package_name": "com.example.busmanagermentapplicationfinal.passenger"
+          "package_name": "com.example.busmanagermentapplicationfinal"
         }
       },
       "oauth_client": [],

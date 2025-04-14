@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imgback3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Back"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUS"
+            android:textStyle="bold"
+            android:textColor="#800080"
+            android:textSize="18sp"
+            android:paddingStart="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TICKETING"
+            android:textColor="#FFC107"
+            android:textSize="18sp"
+            android:paddingStart="2dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/bus"
+            android:contentDescription="Bus Icon"
+            app:tint="#FFC107" />
+    </LinearLayout>
+
+    <!-- Form -->
+    <AutoCompleteTextView
+        android:id="@+id/fromStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="From Station"
+        android:minHeight="48dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/toStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="To Station"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Contact No"
+        android:inputType="phone"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Number of Seats"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <Spinner
+        android:id="@+id/spinnerPaymentMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/btnpay1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book and Pay"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#800080"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

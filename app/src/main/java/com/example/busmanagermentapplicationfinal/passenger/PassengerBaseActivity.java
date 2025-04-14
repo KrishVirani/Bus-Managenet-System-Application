@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.busmanagermentapplicationfinal.R;
+import com.example.busmanagermentapplicationfinal.conductor.Conductor_TicketBooking;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerBaseActivity extends AppCompatActivity {
@@ -40,16 +41,18 @@ public class PassengerBaseActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
-                startActivity(new Intent(this, PassangerDashbord.class));
+                startActivity(new Intent(this, HomePage.class));
                 return true;
 
-            } else if (id == R.id.nav_bookings) {
-//                startActivity(new Intent(this, PassengerBookingsActivity.class));
+            }
+
+            else if (id == R.id.nav_bookings) {
+                startActivity(new Intent(this, view_passenger_Booking.class));
                 return true;
 
             } else if (id == R.id.nav_livelocation) {
-//                startActivity(new Intent(this, PassengerLiveLocationActivity.class));
-                return true;
+//                startActivity(new Intent(this, Livelocation.class));
+//                return true;
 
             } else if (id == R.id.nav_myaccount) {
 //                startActivity(new Intent(this, PassengerAccountActivity.class));

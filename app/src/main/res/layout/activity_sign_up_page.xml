@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpPage">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BUS"
+                android:textColor="#4B0082"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TICKETING"
+                android:textColor="#FFC107"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="4dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+
+                android:layout_marginStart="4dp"
+                app:tint="#FFC107" />
+        </LinearLayout>
+<!--        android:src="@drawable/Bus"-->
+        <!-- Signup Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:elevation="4dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGNUP"
+                android:textColor="#4B0082"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Full Name -->
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter full name"
+                android:padding="12dp"
+                android:background="@drawable/rounded_box"
+                android:textColor="#000000"
+                android:textColorHint="#808080"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Date of Birth -->
+            <EditText
+                android:id="@+id/edtDob"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter date of birth"
+                android:padding="12dp"
+                android:background="@drawable/rounded_box"
+                android:textColor="#000000"
+                android:textColorHint="#808080"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Contact Number -->
+            <EditText
+                android:id="@+id/edtContact"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter contact number"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:background="@drawable/rounded_box"
+                android:textColor="#000000"
+                android:textColorHint="#808080"
+                android:layout_marginBottom="24dp" />
+            <EditText
+                android:id="@+id/edtpassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter The Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:background="@drawable/rounded_box"
+                android:textColor="#000000"
+                android:textColorHint="#808080"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Sign Up Button -->
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Sign up"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:backgroundTint="#4B0082"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

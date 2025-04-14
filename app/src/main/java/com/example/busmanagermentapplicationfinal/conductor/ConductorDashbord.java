@@ -1,6 +1,10 @@
 package com.example.busmanagermentapplicationfinal.conductor;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +13,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.busmanagermentapplicationfinal.R;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ConductorDashbord extends ConductorBaseActivity {
+    private FrameLayout scheduleContainer;
 
+    private FirebaseFirestore db;
+    private String staticConductorId = "syG2YRgAF8h6dsCh2gRo";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +38,74 @@ public class ConductorDashbord extends ConductorBaseActivity {
         setupDrawer(R.layout.activity_conductor_dashbord);
         // Set Toolbar title
         toolbarTitle.setText("Dashboard");
+
+        scheduleContainer = findViewById(R.id.scheduleContainer);
+        db = FirebaseFirestore.getInstance();
+
+        loadSchedule();
     }
+    private void loadSchedule() {
+        DocumentReference userRef = db.collection("User").document(staticConductorId);
+        db.collection("Schedule")
+                .whereEqualTo("conductoreId", userRef)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    boolean hasScheduleToday = false;
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String shiftDate = doc.getString("ShiftDate");
+                        String arrivalTime = doc.getString("Arrival_time");
+                        String departureTime = doc.getString("Departure_time");
+
+                        try {
+                            // Parse date as dd/MM/yyyy
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            Date scheduleDate = sdf.parse(shiftDate);
+                            Date today = sdf.parse(sdf.format(new Date()));
+
+                            // Check if schedule is today
+                            if (scheduleDate != null && scheduleDate.equals(today)) {
+                                hasScheduleToday = true;
+
+                                DocumentReference busRef = doc.getDocumentReference("busId");
+
+                                if (busRef != null) {
+                                    busRef.get().addOnSuccessListener(busSnap -> {
+                                        if (busSnap.exists()) {
+                                            String busName = busSnap.getString("BusName");
+                                            String busType = busSnap.getString("BusType");
+                                            String plateNo = busSnap.getString("PlateNumber");
+                                            Long fare = busSnap.getLong("BusFare_Fee");
+
+                                            View scheduleView = getLayoutInflater().inflate(R.layout.schedule_card, null);
+
+                                            TextView tvDate = scheduleView.findViewById(R.id.tvDate);
+                                            TextView tvTimes = scheduleView.findViewById(R.id.tvTimes);
+                                            TextView tvBusName = scheduleView.findViewById(R.id.tvBusName);
+                                            TextView tvBusDetails = scheduleView.findViewById(R.id.tvBusDetails);
+
+                                            tvDate.setText("Date: " + shiftDate);
+                                            tvTimes.setText("Arrival: " + arrivalTime + " | Departure: " + departureTime);
+                                            tvBusName.setText(busName + " (" + busType + ")");
+                                            tvBusDetails.setText("Fare: ₹" + fare + " | Plate: " + plateNo);
+
+                                            scheduleContainer.addView(scheduleView);
+                                        }
+                                    });
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Show "No schedule" if nothing found for today
+                    if (!hasScheduleToday) {
+                        View noScheduleView = getLayoutInflater().inflate(R.layout.no_schedule_box, null);
+                        scheduleContainer.addView(noScheduleView);
+                    }
+                });
+    }
+
 }

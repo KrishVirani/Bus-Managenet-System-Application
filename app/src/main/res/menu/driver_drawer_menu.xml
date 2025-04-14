@@ -8,6 +8,17 @@
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/nav_bus_schedule"
-        android:title="Book Ticket"
+        android:icon="@drawable/shedule"
+        android:title="Bus Schedule"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/nav_Emargency_alert"
+        android:icon="@drawable/alert"
+        android:title="Emargency Alert"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/logout"
+        android:title="Log Out"
         tools:ignore="HardcodedText" />
 </menu>

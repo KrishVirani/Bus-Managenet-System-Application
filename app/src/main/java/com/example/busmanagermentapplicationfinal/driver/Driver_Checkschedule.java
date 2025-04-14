@@ -2,16 +2,17 @@ package com.example.busmanagermentapplicationfinal.driver;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.busmanagermentapplicationfinal.R;
+import com.example.busmanagermentapplicationfinal.conductor.ConductorBaseActivity;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,52 +20,62 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DriverDashbord extends DriverBaseActivity {
-    private FrameLayout scheduleContainer;
+public class Driver_Checkschedule extends DriverBaseActivity {
 
+    private LinearLayout scheduleContainer;
     private FirebaseFirestore db;
-    private String staticDriverId = "00zkLm88jr9mlOrot77Q";//shedule id Y2SSn9dcl1YoRsz4IkT9
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            EdgeToEdge.enable(this);
-            setContentView(R.layout.activity_driver_dashbord);
-            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-                return insets;
-            });
-            setupDrawer(R.layout.activity_driver_dashbord);
-            // Set Toolbar title
-            toolbarTitle.setText("Dashboard");
-            scheduleContainer = findViewById(R.id.scheduleContainer);
-            db = FirebaseFirestore.getInstance();
+    private String staticConductorId = "syG2YRgAF8h6dsCh2gRo";
 
-            loadSchedule();
-        }
+    ImageView backButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_conductor_checkschedule);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        setupDrawer(R.layout.activity_conductor_checkschedule);
+        toolbarTitle.setText("CONDUCTOR");
+
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        scheduleContainer = findViewById(R.id.scheduleContainer);
+        db = FirebaseFirestore.getInstance();
+
+        loadSchedule();
+
+    }
+
     private void loadSchedule() {
-        DocumentReference userRef = db.collection("User").document(staticDriverId);
+        DocumentReference userRef = db.collection("User").document(staticConductorId);
         db.collection("Schedule")
                 .whereEqualTo("conductoreId", userRef)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    boolean hasScheduleToday = false;
-
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         String shiftDate = doc.getString("ShiftDate");
                         String arrivalTime = doc.getString("Arrival_time");
                         String departureTime = doc.getString("Departure_time");
 
                         try {
-                            // Parse date as dd/MM/yyyy
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            // Parse date with "dd/MM/yy" format
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
                             Date scheduleDate = sdf.parse(shiftDate);
+
+                            // Get today's date without time
                             Date today = sdf.parse(sdf.format(new Date()));
 
-                            // Check if schedule is today
-                            if (scheduleDate != null && scheduleDate.equals(today)) {
-                                hasScheduleToday = true;
-
+                            // Only show current/future schedules
+                            if (scheduleDate != null && !scheduleDate.before(today)) {
                                 DocumentReference busRef = doc.getDocumentReference("busId");
 
                                 if (busRef != null) {
@@ -97,12 +108,7 @@ public class DriverDashbord extends DriverBaseActivity {
                             e.printStackTrace();
                         }
                     }
-
-                    // Show "No schedule" if nothing found for today
-                    if (!hasScheduleToday) {
-                        View noScheduleView = getLayoutInflater().inflate(R.layout.no_schedule_box, null);
-                        scheduleContainer.addView(noScheduleView);
-                    }
                 });
     }
+
 }
