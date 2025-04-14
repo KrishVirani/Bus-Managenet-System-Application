@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".driver.DriverEditProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header -->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingBottom="24dp">-->
+
+<!--            &lt;!&ndash; Back Arrow &ndash;&gt;-->
+<!--            <ImageView-->
+<!--                android:id="@+id/imgBack"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/back"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                app:tint="@color/appPurple" />-->
+
+<!--            &lt;!&ndash; BUS (Purple) &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="BUS"-->
+<!--                android:textColor="@color/appPurple"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            &lt;!&ndash; TICKETING (Yellow) &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="TICKETING"-->
+<!--                android:textColor="@color/appYellow"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            &lt;!&ndash; Bus Icon &ndash;&gt;-->
+<!--            <ImageView-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                app:tint="@color/appYellow"-->
+<!--                android:src="@drawable/bus" />-->
+<!--        </LinearLayout>-->
+
+        <!-- Heading -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:paddingBottom="24dp" />
+
+        <!-- Contact Number -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Number"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etContact"
+            android:hint="Enter Contact Number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- First Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etFirstName"
+            android:hint="First Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Last Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etLastName"
+            android:hint="Last Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Date of Birth -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date of Birth"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etDOB"
+            android:hint="Date of Birth"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Gender -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etGender"
+            android:hint="Gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etEmail"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Address -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/etAddress"
+            android:hint="Enter Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress" />
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/btnUpdate"
+            android:text="Update Profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+</ScrollView>

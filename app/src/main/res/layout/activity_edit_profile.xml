@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".passenger.EditProfile">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingBottom="24dp">-->
+
+<!--                &lt;!&ndash; Back Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgBack"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:src="@drawable/back"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    app:tint="@color/appPurple" />-->
+
+<!--                &lt;!&ndash; BUS (Purple) &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="BUS"-->
+<!--                    android:textColor="@color/appPurple"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                &lt;!&ndash; TICKETING (Yellow) &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="TICKETING"-->
+<!--                    android:textColor="@color/appYellow"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                &lt;!&ndash; Bus Icon &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_marginStart="4dp"-->
+<!--                    app:tint="@color/appYellow" />-->
+<!--        </LinearLayout>-->
+<!--        android:src="@drawable/Bus"-->
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="24dp" />
+
+        <!-- Contact Number -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact Number" />
+        <EditText
+            android:id="@+id/etContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contact Number"
+            android:inputType="phone"
+            android:enabled="false"
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#888888"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Full Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name" />
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Date of Birth -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date of Birth" />
+        <EditText
+            android:id="@+id/etDOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date of Birth (dd/mm/yyyy)"
+            android:focusable="false"
+            android:clickable="true"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Password -->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Password" />-->
+<!--        <EditText-->
+<!--            android:id="@+id/etPassword"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="Password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:padding="12dp"-->
+<!--            android:layout_marginBottom="24dp" />-->
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Profile"
+            android:padding="12dp" />
+
+</LinearLayout>
