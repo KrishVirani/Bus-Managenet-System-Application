@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Logo & Title -->
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUSTICKETING|"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#662D91" />
+
+        <!-- Sub Text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, User.\nLooking for a bus?"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:textColor="#000000" />
+
+        <!-- Image -->
+
+        <!-- White Card -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="Bus Stop"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:elevation="4dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <!-- From -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="From"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:id="@+id/fromEditTextId"
+                android:drawableStart="@android:drawable/ic_menu_mylocation"
+                android:inputType="text" />
+
+            <!-- To -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="To"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:id="@+id/toEditTextId"
+                android:drawableStart="@android:drawable/ic_menu_directions"
+                android:inputType="text"
+                android:layout_marginTop="8dp" />
+
+            <!-- Date and Time -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Date"
+                    android:id="@+id/dateEditTextId"
+                    android:drawableStart="@android:drawable/ic_menu_today"
+                    android:inputType="date" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Search Now Button -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Now"
+            android:id="@+id/searchNowBtnId"
+            android:backgroundTint="#662D91"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>

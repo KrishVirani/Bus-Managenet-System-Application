@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/white_rounded_card"
+    android:padding="12dp"
+    android:layout_marginBottom="12dp"
+    android:elevation="2dp">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/tvTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrival and Departure"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:textColor="#333" />
+
+    <TextView
+        android:id="@+id/tvBusName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bus Name"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"
+        android:textColor="#673AB7" />
+
+    <TextView
+        android:id="@+id/tvBusDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fare | Plate"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:textColor="#555" />
+</LinearLayout>
