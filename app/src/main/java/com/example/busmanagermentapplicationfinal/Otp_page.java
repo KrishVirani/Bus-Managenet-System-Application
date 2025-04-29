@@ -82,71 +82,7 @@ public class Otp_page extends AppCompatActivity {
         });
     }
 
-    private void sendVerificationCode(String number) {
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                .setPhoneNumber(number)
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        String code = credential.getSmsCode();
-                        if (code != null) {
-                            fillOtpFields(code);
-                            verifyCode(code);
-                        }
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(Otp_page.this, "Verification Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.e("OTP", "Verification Failed"+e.getMessage(), e);
-                    }
-
-                    @Override
-                    public void onCodeSent(String id, PhoneAuthProvider.ForceResendingToken token) {
-                        verificationId = id;
-                        resendToken = token;
-                        Toast.makeText(Otp_page.this, "OTP Sent Successfully", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
-
-    private void resendVerificationCode(String number, PhoneAuthProvider.ForceResendingToken token) {
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                .setPhoneNumber(number)
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        String code = credential.getSmsCode();
-                        if (code != null) {
-                            fillOtpFields(code);
-                            verifyCode(code);
-                        }
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(Otp_page.this, "Resend Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onCodeSent(String id, PhoneAuthProvider.ForceResendingToken token) {
-                        verificationId = id;
-                        resendToken = token;
-                        Toast.makeText(Otp_page.this, "OTP Resent", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setForceResendingToken(token)
-                .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
+   
 
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
