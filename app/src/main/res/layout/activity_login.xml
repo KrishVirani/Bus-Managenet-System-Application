@@ -55,7 +55,7 @@
                 android:contentDescription="bus Icon"
                 app:tint="#FFC107" />
         </LinearLayout>
-<!--        android:src="@drawable/Bus"-->
+        <!--        android:src="@drawable/Bus"-->
         <!-- Login Title -->
         <TextView
             android:layout_width="wrap_content"
@@ -82,29 +82,10 @@
             android:layout_marginBottom="16dp" />
 
         <!-- Password Input -->
-        <EditText
-            android:id="@+id/Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your password"
-            android:inputType="textPassword"
-            android:background="@drawable/rounded_box"
-            android:padding="12dp"
-            android:textColorHint="#808080"
-            android:textColor="#000000"
-            android:layout_marginBottom="16dp" />
+
 
         <!-- Error Message -->
-        <TextView
-            android:id="@+id/tvError"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000"
-            android:visibility="gone"
-            android:text="Incorrect password"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center" />
+
 
 
         <!-- Login Button -->

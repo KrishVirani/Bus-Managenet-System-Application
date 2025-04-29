@@ -55,7 +55,7 @@ public class SelectStationsPage extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         suggestionList=findViewById(R.id.suggestionList);
         fromEditText=findViewById(R.id.fromEditText);
-        backButton = findViewById(R.id.btnbk);
+        backButton = findViewById(R.id.btnback);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

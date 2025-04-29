@@ -56,8 +56,6 @@ public class Livelocation extends AppCompatActivity {
         loaderContainer = findViewById(R.id.loaderContainer);
         mapView.setVisibility(View.INVISIBLE); // hide at first
 
-        // ✅ Initialize the Map
-        mapView = findViewById(R.id.map);
         mapView.setTileSource(TileSourceFactory.MAPNIK);  // Best detailed view
 
         // ✅ Improve Tile Quality

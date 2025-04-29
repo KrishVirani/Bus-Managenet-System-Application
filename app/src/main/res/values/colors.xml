@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple">#51259B</color>
+    <color name="background">#F3F3F3</color>
+    <color name="blueheader">#51259B</color>
+    <color name="button">#8566b9</color>
+    <color name="inputBackground">#F5F5F5</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#616161</color>
+    <color name="colorPrimary">#4CAF50</color>
+
+    <!-- Optional additional theme colors -->
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorAccent">#8BC34A</color>
+
+    <!-- Neutral / background -->
+    <color name="lightGray">#F6F6F6</color>
 </resources>

@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     android:gravity="center"
     android:padding="24dp">
@@ -12,15 +13,56 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Optional Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SEND ALERT"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#6A1B9A"
-            android:layout_marginBottom="24dp" />
+        <!-- Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/blueheader"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            app:tint="@android:color/white"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/backButton12"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/backagain"
+                android:contentDescription="Back" />
+
+            <View
+                android:id="@+id/verticalLine"
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_toEndOf="@id/backButton12"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/white" />
+
+            <TextView
+                android:id="@+id/headerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEND ALERT"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/busIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/bus"
+                android:contentDescription="Bus Icon"
+                app:tint="@android:color/white" />
+        </RelativeLayout>
+
 
         <!-- Light Grey Form Box -->
         <LinearLayout
@@ -50,13 +92,13 @@
                 android:inputType="textMultiLine" />
 
             <!-- User Spinner -->
-            <Spinner
-                android:id="@+id/sp_user"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#6A1B9A"
-                android:padding="16dp" />
+<!--            <Spinner-->
+<!--                android:id="@+id/sp_user"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="55dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:backgroundTint="#6A1B9A"-->
+<!--                android:padding="16dp" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

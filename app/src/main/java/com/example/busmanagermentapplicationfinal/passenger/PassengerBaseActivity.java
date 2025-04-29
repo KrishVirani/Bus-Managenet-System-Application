@@ -37,73 +37,26 @@ public class PassengerBaseActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.passenger_bottom_nav);
         toolbarTitle = findViewById(R.id.toolbar_title);
         // Handle navigation clicks if needed globally
-        setupBottomNavigation();
-        updateNavigationState();
-//        bottomNavigationView.setOnItemSelectedListener(item -> {
-//            int id = item.getItemId();
-//
-//            if (id == R.id.nav_home) {
-//                startActivity(new Intent(this, HomePage.class));
-//            }
-//
-//            else if (id == R.id.nav_bookings) {
-//                startActivity(new Intent(this, view_passenger_Booking.class));
-//                bottomNavigationView.setSelectedItemId(R.id.nav_bookings);
-//            } else if (id == R.id.nav_livelocation) {
-//                startActivity(new Intent(this, Live_Location_BusList.class));
-//
-//            } else if (id == R.id.nav_myaccount) {
-////                startActivity(new Intent(this, PassengerAccountActivity.class));
-//            }
-//
-//            return false;
-//        });
-    }
-    private void setupBottomNavigation() {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            Class<?> destination = null;
 
             if (id == R.id.nav_home) {
-                destination = HomePage.class;
-            } else if (id == R.id.nav_bookings) {
-                destination = view_passenger_Booking.class;
-            } else if (id == R.id.nav_livelocation) {
-                destination = Live_Location_BusList.class;
-            } else if (id == R.id.nav_myaccount) {
-                // Handle account navigation
+                startActivity(new Intent(this, HomePage.class));
             }
 
-            if (destination != null && !this.getClass().equals(destination)) {
-                Intent intent = new Intent(this, destination);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                overridePendingTransition(0, 0); // Remove animation
-                return true;
+            else if (id == R.id.nav_bookings) {
+                startActivity(new Intent(this, view_passenger_Booking.class));
+            } else if (id == R.id.nav_livelocation) {
+                startActivity(new Intent(this, Live_Location_BusList.class));
+
+            } else if (id == R.id.nav_myaccount) {
+                startActivity(new Intent(this, EditProfile.class));
             }
 
             return false;
         });
     }
-    protected void setSelectedItem(int itemId) {
-        bottomNavigationView.setSelectedItemId(itemId);
-    }
-    protected void updateNavigationState() {
-        if (this instanceof HomePage) {
-            bottomNavigationView.setSelectedItemId(R.id.nav_home);
-        } else if (this instanceof view_passenger_Booking) {
-            bottomNavigationView.setSelectedItemId(R.id.nav_bookings);
-        } else if (this instanceof Live_Location_BusList) {
-            bottomNavigationView.setSelectedItemId(R.id.nav_livelocation);
-        }
-        // Add other activities as needed
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateNavigationState();
-    }
     public void setContentLayout(int layoutId) {
         LayoutInflater.from(this).inflate(layoutId, frameLayout, true);
     }

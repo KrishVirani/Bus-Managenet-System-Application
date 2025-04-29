@@ -11,51 +11,59 @@
         android:id="@+id/mainLayout"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#F3F3F3"
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- Header -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_height="56dp"
+            android:background="@color/blueheader"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            app:tint="@android:color/white"
+            android:layout_marginBottom="20dp">
 
             <ImageView
                 android:id="@+id/btnback"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:contentDescription="Back"
-                android:src="@drawable/back"/>
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/backagain"
+                android:contentDescription="Back" />
+
+            <View
+                android:id="@+id/verticalLine"
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:layout_toEndOf="@id/btnback"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/white" />
 
             <TextView
+                android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BUS"
+                android:text="VERIFY BOOKINGS"
                 android:textStyle="bold"
-                android:textColor="#800080"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"
-                android:paddingStart="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TICKETING"
-                android:textColor="#FFC107"
-                android:textSize="18sp"
-                android:paddingStart="2dp"
-                android:textStyle="bold" />
+                android:layout_centerInParent="true" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="4dp"
+                android:id="@+id/busIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
                 android:src="@drawable/bus"
                 android:contentDescription="Bus Icon"
-                app:tint="#FFC107" />
-        </LinearLayout>
-
+                app:tint="@android:color/white" />
+        </RelativeLayout>
         <!-- Booking ID Input -->
         <EditText
             android:id="@+id/etBookingId"
@@ -67,14 +75,7 @@
             android:padding="12dp"
             android:layout_marginTop="16dp" />
 
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search Booking"
-            android:backgroundTint="#673AB7"
-            android:textColor="#FFF"
-            android:layout_marginTop="8dp" />
+
         <TextView
             android:id="@+id/tvNoBookingMessage"
             android:layout_width="wrap_content"

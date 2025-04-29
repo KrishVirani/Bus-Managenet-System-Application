@@ -85,7 +85,7 @@ public class Conductor_Checkschedule extends ConductorBaseActivity {
                                             String busName = busSnap.getString("BusName");
                                             String busType = busSnap.getString("BusType");
                                             String plateNo = busSnap.getString("PlateNumber");
-                                            Long fare = busSnap.getLong("BusFare_Fee");
+                                            String fare = busSnap.getString("BusFare_Fee");
 
                                             View scheduleView = getLayoutInflater().inflate(R.layout.schedule_card, null);
 

@@ -23,7 +23,7 @@ public class DriverDashbord extends DriverBaseActivity {
     private FrameLayout scheduleContainer;
 
     private FirebaseFirestore db;
-    private String staticDriverId = "00zkLm88jr9mlOrot77Q";//shedule id Y2SSn9dcl1YoRsz4IkT9
+    private String staticDriverId = "299qvqYeCwMIXqO7E5Fy";//shedule id Y2SSn9dcl1YoRsz4IkT9
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class DriverDashbord extends DriverBaseActivity {
     private void loadSchedule() {
         DocumentReference userRef = db.collection("User").document(staticDriverId);
         db.collection("Schedule")
-                .whereEqualTo("conductoreId", userRef)
+                .whereEqualTo("driverId", userRef)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     boolean hasScheduleToday = false;
@@ -73,7 +73,7 @@ public class DriverDashbord extends DriverBaseActivity {
                                             String busName = busSnap.getString("BusName");
                                             String busType = busSnap.getString("BusType");
                                             String plateNo = busSnap.getString("PlateNumber");
-                                            Long fare = busSnap.getLong("BusFare_Fee");
+                                            String fare = busSnap.getString("BusFare_Fee");
 
                                             View scheduleView = getLayoutInflater().inflate(R.layout.schedule_card, null);
 

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.busmanagermentapplicationfinal.passenger.HomePage;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -17,10 +18,10 @@ import java.util.Map;
 
 public class SignUpPage extends AppCompatActivity {
 
-    EditText edtName, edtDob, edtContact, edtPassword;
+    EditText edtName, edtDob, edtemail;
     View btnSignUp;
     FirebaseFirestore db;
-    Calendar selectedDate = Calendar.getInstance();
+    String contact_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,13 @@ public class SignUpPage extends AppCompatActivity {
         // Initialize views
         edtName = findViewById(R.id.edtName);
         edtDob = findViewById(R.id.edtDob);
-        edtContact = findViewById(R.id.edtContact);
-        edtPassword = findViewById(R.id.edtpassword);
+        edtemail = findViewById(R.id.edtemail);
         btnSignUp = findViewById(R.id.btnSignUp);
 
-        edtDob.setFocusable(false); // Prevent keyboard popup
-        // Show DatePicker when clicking on DOB field
+        contact_no = getIntent().getStringExtra("Contact_no");
+
+        // Date picker on click
+        edtDob.setFocusable(false);
         edtDob.setOnClickListener(v -> showDatePickerDialog());
 
         btnSignUp.setOnClickListener(view -> validateAndSignUp());
@@ -53,77 +55,64 @@ public class SignUpPage extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 SignUpPage.this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    selectedDate.set(selectedYear, selectedMonth, selectedDay);
-                    // Check if user is 18+
-                    if (isUserAdult(selectedDate)) {
-                        String dob = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                        edtDob.setText(dob);
-                    } else {
-                        edtDob.setText(""); // Clear invalid DOB
-                        Toast.makeText(this, "You must be at least 18 years old.", Toast.LENGTH_SHORT).show();
-                    }
-
+                    String dob = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+                    edtDob.setText(dob);
                 },
                 year, month, day
         );
 
-
-        // Prevent future dates
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
-    private boolean isUserAdult(Calendar dob) {
-        Calendar today = Calendar.getInstance();
-        today.add(Calendar.YEAR, -18); // Go back 18 years
-        return dob.compareTo(today) <= 0;
-    }
+
     private void validateAndSignUp() {
         String name = edtName.getText().toString().trim();
         String dob = edtDob.getText().toString().trim();
-        String contact = edtContact.getText().toString().trim();
-        String password = edtPassword.getText().toString().trim();
+        String email = edtemail.getText().toString().trim();
 
-        // Validation
+        // Validate name: required, no digits allowed
         if (name.isEmpty()) {
             edtName.setError("Name is required");
             edtName.requestFocus();
             return;
+        } else if (!name.matches("^[a-zA-Z\\s]+$")) {
+            edtName.setError("Only letters allowed in name");
+            edtName.requestFocus();
+            return;
         }
+
+        // Validate DOB: required
         if (dob.isEmpty()) {
             edtDob.setError("Date of Birth is required");
             edtDob.requestFocus();
             return;
         }
-        if (!contact.matches("^[6-9]\\d{9}$") || contact.matches("(\\d)\\1{9}")) {
-            edtContact.setError("Enter a valid contact starting with 6-9 and not all same digits");
-            edtContact.requestFocus();
+
+        // Validate email format
+        if (email.isEmpty()) {
+            edtemail.setError("Email is required");
+            edtemail.requestFocus();
+            return;
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            edtemail.setError("Enter a valid email");
+            edtemail.requestFocus();
             return;
         }
 
-        if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{6,}$")) {
-            edtPassword.setError("Password must be 6 characters, include 1 letter, 1 number & 1 special character");
-            edtPassword.requestFocus();
-            return;
-        }
-
-
-
-        // Prepare data
+        // Store in Firestore (auto-generated ID)
         Map<String, Object> user = new HashMap<>();
         user.put("Name", name);
         user.put("DOB", dob);
-        user.put("Contact_no", contact);
-        user.put("Password", password);
+        user.put("Email", email);
+        user.put("Contact_no", contact_no);
 
-        // Add to Firestore
-        db.collection("Passenger").document(contact)
-                .set(user)
-                .addOnSuccessListener(unused -> {
+        db.collection("Passenger")
+                .add(user)
+                .addOnSuccessListener(documentReference -> {
                     Toast.makeText(SignUpPage.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUpPage.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
                     clearFields();
+                    startActivity(new Intent(SignUpPage.this, HomePage.class)); // Redirect to HomePage
+                    finish();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(SignUpPage.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()
@@ -133,7 +122,6 @@ public class SignUpPage extends AppCompatActivity {
     private void clearFields() {
         edtName.setText("");
         edtDob.setText("");
-        edtContact.setText("");
-        edtPassword.setText("");
+        edtemail.setText("");
     }
 }

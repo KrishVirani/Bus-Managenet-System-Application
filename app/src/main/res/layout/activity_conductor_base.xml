@@ -16,17 +16,39 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#51259B"
+            android:layout_margin="10dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <TextView
-                android:id="@+id/toolbar_title"
+            <!-- Use a RelativeLayout or ConstraintLayout to position the text and image -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="30dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+
+                <!-- Toolbar Title (TextView) -->
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="311dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Bus Icon (ImageView) -->
+                <ImageView
+                    android:id="@+id/busIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/bus"
+                    android:layout_marginRight="20dp"
+                    android:contentDescription="Bus Icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:tint="@android:color/white" />
+            </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout

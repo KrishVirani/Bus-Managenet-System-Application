@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -51,11 +52,12 @@ public class conductor_view_Check_booking extends ConductorBaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         setupDrawer(R.layout.activity_conductor_view_check_booking);
         toolbarTitle.setText("View Booking");
 
         etBookingId = findViewById(R.id.etBookingId);
-        btnSearch = findViewById(R.id.btnSearch);
+//        btnSearch = findViewById(R.id.btnSearch);
         resultContainer = findViewById(R.id.resultContainer);
         db = FirebaseFirestore.getInstance();
         backButton = findViewById(R.id.btnback);
@@ -68,19 +70,19 @@ public class conductor_view_Check_booking extends ConductorBaseActivity {
             }
         });
 
-        btnSearch.setOnClickListener(v -> {
-            String idStr = etBookingId.getText().toString().trim();
-            if (TextUtils.isEmpty(idStr)) {
-                Toast.makeText(this, "Enter Booking ID", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            try {
-                int bookingId = Integer.parseInt(idStr);
-                fetchBookingById(bookingId);
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Invalid Booking ID", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        btnSearch.setOnClickListener(v -> {
+//            String idStr = etBookingId.getText().toString().trim();
+//            if (TextUtils.isEmpty(idStr)) {
+//                Toast.makeText(this, "Enter Booking ID", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            try {
+//                int bookingId = Integer.parseInt(idStr);
+//                fetchBookingById(bookingId);
+//            } catch (NumberFormatException e) {
+//                Toast.makeText(this, "Invalid Booking ID", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         etBookingId.addTextChangedListener(new TextWatcher() {
             @Override
@@ -97,7 +99,8 @@ public class conductor_view_Check_booking extends ConductorBaseActivity {
                         int bookingId = Integer.parseInt(idStr);
                         fetchBookingById(bookingId);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(getApplicationContext(), "Invalid Booking ID", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Invalid Booking ID", Toast.LENGTH_SHORT).show();
+                        showErrorLayout(R.layout.no_data);
                     }
                 }
             }
@@ -108,6 +111,12 @@ public class conductor_view_Check_booking extends ConductorBaseActivity {
 
     }
 
+    private void showErrorLayout(int layoutResId) {
+        FrameLayout container = findViewById(R.id.scheduleContainer);
+        container.removeAllViews();
+        View errorView = getLayoutInflater().inflate(layoutResId, container, false);
+        container.addView(errorView);
+    }
     private void fetchBookingById(int bookingId) {
         db.collection("OnlineTicketBooking")
                 .whereEqualTo("ID", bookingId)

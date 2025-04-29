@@ -18,14 +18,45 @@
         android:theme="@style/Theme.BusManagermentApplicationFinal"
         tools:targetApi="31">
         <activity
+            android:name=".passenger.add_passenger_details_Page"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.EditProfile"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".conductor.ConductorDashbord" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".driver.DriverDashbord" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".Otp_page"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.PassList"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.PassPersonalDetails"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.PassAddressDetails"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.PassIDvarifiaction"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.Pass_PassDetails"
+            android:exported="false" />
+        <activity
+            android:name=".passenger.PassPreview"
+            android:exported="false" />
+        <activity
             android:name=".passenger.Live_Location_BusList"
             android:exported="false" />
         <activity
             android:name=".passenger.Livelocation"
-            android:exported="false" />
-<!--         <activity-->
-<!--         android:name=".passenger.PassangerDashbord"-->
-<!--         android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".passenger.PassangerDashbord" -->
+        <!-- android:exported="false" /> -->
         <!-- <activity -->
         <!-- android:name=".passenger.PassangerDashbord" -->
         <!-- android:exported="false" /> -->
@@ -47,10 +78,9 @@
             android:exported="false" />
         <activity
             android:name=".conductor.conductor_view_Check_booking"
-            android:exported="false" />
-        <activity
-            android:name=".conductor.create_emergency_alert"
-            android:exported="false" />
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".conductor.create_emergency_alert" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".conductor.Conductor_TicketBooking"
             android:exported="false" />
@@ -58,17 +88,13 @@
             android:name=".driver.Driver_Checkschedule"
             android:exported="false" />
         <activity
-            android:name=".driver.driver_create_emergency_alert"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpPage"
-            android:exported="false" />
-<!--         <activity-->
-<!--         android:name=".passenger.HomePage"-->
-<!--         android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".passenger.HomePage" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".passenger.BusSearchPage"
             android:exported="false" />
@@ -80,9 +106,11 @@
             android:exported="false" />
         <activity
             android:name=".passenger.view_passenger_Booking"
-            android:exported="false" />
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".conductor.create_emergency_alert" -->
+        <!-- android:exported="false" /> -->
         <activity
-            android:name=".passenger.EditProfile"
+            android:name=".passenger.HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -90,6 +118,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".passenger.BusTrackingService"
+            android:exported="false"
+            android:permission="android.permission.FOREGROUND_SERVICE" />
     </application>
 
 </manifest>

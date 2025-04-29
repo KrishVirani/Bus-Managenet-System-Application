@@ -2,6 +2,7 @@ package com.example.busmanagermentapplicationfinal.passenger;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class view_passenger_Booking extends PassengerBaseActivity {
     private LinearLayout bookingListContainer;
     private FirebaseFirestore db;
     private String staticPassengerId = "7NTNWfsOaHUnHNdagUTg";
+    private FrameLayout noDataPlaceholder;
+
     ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +37,20 @@ public class view_passenger_Booking extends PassengerBaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        noDataPlaceholder = findViewById(R.id.noDataPlaceholder);
+
         setContentLayout(R.layout.activity_view_passenger_booking);
         toolbarTitle.setText("Passenger Booking");
-        backButton = findViewById(R.id.btnbck);
-        setSelectedItem(R.id.nav_bookings);
+//        backButton = findViewById(R.id.btnbck);
 
 //        bottomNavigationView.setSelectedItemId(R.id.nav_bookings);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         bookingListContainer = findViewById(R.id.bookingListContainer);
         db = FirebaseFirestore.getInstance();
 
@@ -58,17 +62,30 @@ public class view_passenger_Booking extends PassengerBaseActivity {
                 .whereEqualTo("PassangerId", db.document("Passenger/" + staticPassengerId))
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        String busRefPath = doc.getDocumentReference("Bus_id").getPath();
-                        String fromRefPath = doc.getDocumentReference("From").getPath();
-                        String toRefPath = doc.getDocumentReference("To").getPath();
-                        String date = doc.getString("Date_of_booking");
-                        Long seatNum = doc.getLong("Seats_Number");
+                    if (queryDocumentSnapshots.isEmpty()) {
+                        showNoDataLayout();
+                    } else {
+                        noDataPlaceholder.setVisibility(View.GONE); // hide placeholder if present
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            String busRefPath = doc.getDocumentReference("Bus_id").getPath();
+                            String fromRefPath = doc.getDocumentReference("From").getPath();
+                            String toRefPath = doc.getDocumentReference("To").getPath();
+                            String date = doc.getString("Date_of_booking");
+                            Long seatNum = doc.getLong("Seats_Number");
 
-                        fetchDetailsAndAddCard(busRefPath, fromRefPath, toRefPath, date, seatNum);
+                            fetchDetailsAndAddCard(busRefPath, fromRefPath, toRefPath, date, seatNum);
+                        }
                     }
                 });
     }
+
+    private void showNoDataLayout() {
+        noDataPlaceholder.setVisibility(View.VISIBLE);
+        View noDataView = getLayoutInflater().inflate(R.layout.no_data, null);
+        noDataPlaceholder.removeAllViews();
+        noDataPlaceholder.addView(noDataView);
+    }
+
 
     private void fetchDetailsAndAddCard(String busRefPath, String fromRefPath, String toRefPath, String date, Long seatNum) {
         Task<DocumentSnapshot> busTask = db.document(busRefPath).get();

@@ -24,7 +24,7 @@ public class Driver_Checkschedule extends DriverBaseActivity {
 
     private LinearLayout scheduleContainer;
     private FirebaseFirestore db;
-    private String staticConductorId = "syG2YRgAF8h6dsCh2gRo";
+    private String staticConductorId = "299qvqYeCwMIXqO7E5Fy";
 
     ImageView backButton;
     @Override
@@ -58,7 +58,7 @@ public class Driver_Checkschedule extends DriverBaseActivity {
     private void loadSchedule() {
         DocumentReference userRef = db.collection("User").document(staticConductorId);
         db.collection("Schedule")
-                .whereEqualTo("conductoreId", userRef)
+                .whereEqualTo("driverId", userRef)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
@@ -84,7 +84,7 @@ public class Driver_Checkschedule extends DriverBaseActivity {
                                             String busName = busSnap.getString("BusName");
                                             String busType = busSnap.getString("BusType");
                                             String plateNo = busSnap.getString("PlateNumber");
-                                            Long fare = busSnap.getLong("BusFare_Fee");
+                                            String fare = busSnap.getString("BusFare_Fee");
 
                                             View scheduleView = getLayoutInflater().inflate(R.layout.schedule_card, null);
 

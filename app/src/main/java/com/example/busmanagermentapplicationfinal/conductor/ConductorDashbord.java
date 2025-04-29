@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ConductorDashbord extends ConductorBaseActivity {
     private FrameLayout scheduleContainer;
@@ -52,6 +54,7 @@ public class ConductorDashbord extends ConductorBaseActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     boolean hasScheduleToday = false;
 
+
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         String shiftDate = doc.getString("ShiftDate");
                         String arrivalTime = doc.getString("Arrival_time");
@@ -59,9 +62,12 @@ public class ConductorDashbord extends ConductorBaseActivity {
 
                         try {
                             // Parse date as dd/MM/yyyy
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
                             Date scheduleDate = sdf.parse(shiftDate);
                             Date today = sdf.parse(sdf.format(new Date()));
+
+//
+//                            Toast.makeText(getApplicationContext(), "date: today "+today +", database "+scheduleDate, Toast.LENGTH_SHORT).show();
 
                             // Check if schedule is today
                             if (scheduleDate != null && scheduleDate.equals(today)) {
@@ -75,7 +81,7 @@ public class ConductorDashbord extends ConductorBaseActivity {
                                             String busName = busSnap.getString("BusName");
                                             String busType = busSnap.getString("BusType");
                                             String plateNo = busSnap.getString("PlateNumber");
-                                            Long fare = busSnap.getLong("BusFare_Fee");
+                                            String fare = busSnap.getString("BusFare_Fee");
 
                                             View scheduleView = getLayoutInflater().inflate(R.layout.schedule_card, null);
 

@@ -4,8 +4,11 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.busmanagermentapplicationfinal.R;
 import com.google.firebase.firestore.*;
 
 import java.util.*;
@@ -16,8 +19,10 @@ public class ConductorEditProfile extends AppCompatActivity {
     Button btnUpdate;
     FirebaseFirestore db;
     String documentId = "";
-    String oldContact = "8777777777"; // Hardcoded for fetching
+    String oldContact = ""; // Hardcoded for fetching
 
+    String conductorId = "299qvqYeCwMIXqO7E5Fy";
+    ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,18 +39,48 @@ public class ConductorEditProfile extends AppCompatActivity {
 //        etEmail = findViewById(R.id.etEmail);
 //        btnUpdate = findViewById(R.id.btnUpdate);
 
-        etContact.setText(oldContact); // Set default contact
+//        etContact.setText(oldContact); // Set default contact
+//
+//        fetchConductorData();
 
-        fetchConductorData();
+        backButton = findViewById(R.id.backButton2);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        db.collection("User").document(conductorId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        oldContact = documentSnapshot.getString("Contact_no");
+                        etContact.setText(oldContact); // Now set it after fetching
+                        fetchConductorData(); // Fetch the rest after oldContact is loaded
+                    } else {
+                        Toast.makeText(this, "Conductor not found", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
 
         etDOB.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            DatePickerDialog datePicker = new DatePickerDialog(this, (view, year, month, day) -> {
-                String date = String.format("%04d-%02d-%02d", year, month + 1, day);
+            calendar.add(Calendar.YEAR, -18); // 18 years before today
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePicker = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
+                String date = String.format("%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay);
                 etDOB.setText(date);
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+            }, year, month, day);
+
+            datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis()); // restrict future dates
             datePicker.show();
         });
+
 
         btnUpdate.setOnClickListener(v -> updateConductorData());
     }
@@ -95,8 +130,32 @@ public class ConductorEditProfile extends AppCompatActivity {
             return;
         }
 
+        if (!Patterns.PHONE.matcher(contact).matches() || contact.length() < 10) {
+            Toast.makeText(this, "Invalid contact number", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            String[] parts = dob.split("-");
+            int year = Integer.parseInt(parts[0]);
+            Calendar dobCalendar = Calendar.getInstance();
+            dobCalendar.set(Calendar.YEAR, year);
+            dobCalendar.set(Calendar.MONTH, Integer.parseInt(parts[1]) - 1);
+            dobCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parts[2]));
+
+            Calendar today = Calendar.getInstance();
+            today.add(Calendar.YEAR, -18);
+            if (dobCalendar.after(today)) {
+                Toast.makeText(this, "Conductor must be at least 18 years old", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Invalid Date of Birth format", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -117,4 +176,5 @@ public class ConductorEditProfile extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Toast.makeText(this, "Update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 }

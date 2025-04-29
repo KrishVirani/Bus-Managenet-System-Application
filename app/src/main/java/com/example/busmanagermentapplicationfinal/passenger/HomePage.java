@@ -48,11 +48,20 @@ public class HomePage extends PassengerBaseActivity {
         toolbarTitle.setText("Passenger Dashboard");
 //        bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
+        //start BusTrackingService service
+        Intent serviceIntent = new Intent(this, BusTrackingService.class);
+        startService(serviceIntent);
+
+
         fromEditText = findViewById(R.id.fromEditTextId);
         toEditText = findViewById(R.id.toEditTextId);
         dateEditText = findViewById(R.id.dateEditTextId);
         searchBtn = findViewById(R.id.searchNowBtnId);
-
+        Button btnGoToPass = findViewById(R.id.btnGoToPass);
+        btnGoToPass.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, PassList.class); // or your pass screen
+            startActivity(intent);
+        });
         fromEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -94,6 +103,7 @@ public class HomePage extends PassengerBaseActivity {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             String dateStr = dayOfMonth + "/" + (month + 1) + "/" + year;
+//                            Toast.makeText(HomePage.this,"Sre"+ dateStr, Toast.LENGTH_SHORT).show();
                             dateEditText.setText(dateStr);
                         }
                     },year,month,day);

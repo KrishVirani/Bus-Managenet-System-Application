@@ -91,6 +91,7 @@ public class BusSearchPage extends AppCompatActivity {
                     AtomicBoolean busFound = new AtomicBoolean(false);
 
                     for (QueryDocumentSnapshot scheduleDoc : scheduleSnapshots) {
+                        String scheduleId = scheduleDoc.getId(); // Get Schedule ID
                         DocumentReference routeRef = scheduleDoc.getDocumentReference("routeId");
                         DocumentReference busRef = scheduleDoc.getDocumentReference("busId");
                          if (routeRef == null || busRef == null) continue;
@@ -121,6 +122,7 @@ public class BusSearchPage extends AppCompatActivity {
                                             }
                                         }
                                     }
+//                                    Toast.makeText(this, "insode load", Toast.LENGTH_SHORT).show();
 
                                     if (sourceOrder != -1 && destOrder != -1 && sourceOrder < destOrder) {
                                         busFound.set(true);
@@ -131,11 +133,12 @@ public class BusSearchPage extends AppCompatActivity {
                                                 .addOnSuccessListener(busDoc -> {
                                                     String busName = busDoc.getString("BusName");
                                                     String type = busDoc.getString("BusType");
-                                                    Double fare = busDoc.getDouble("BusFare_Fee");
+                                                    String fare = busDoc.getString("BusFare_Fee");
                                                     String category = busDoc.getString("Category");
                                                     String dimension = busDoc.getString("Dimension");
                                                     String plateNumber = busDoc.getString("PlateNumber");
-                                                    Long capacity = busDoc.getLong("Capacity");
+                                                    String capacity = busDoc.getString("Capacity");
+
 
                                                     View busCard = LayoutInflater.from(this).inflate(R.layout.item_bus, null);
                                                     ((TextView) busCard.findViewById(R.id.busName)).setText(busName != null ? busName : "Unknown Bus");
@@ -150,6 +153,8 @@ public class BusSearchPage extends AppCompatActivity {
                                                     ((TextView) busCard.findViewById(R.id.departure)).setText("Departs: 08:00 AM");
                                                     ((TextView) busCard.findViewById(R.id.arrival)).setText("Arrives: 01:00 PM");
                                                     ((TextView) busCard.findViewById(R.id.duration)).setText("Duration: 5h");
+                                                    int intFare = Integer.parseInt(fare);
+                                                    int capacityint=Integer.parseInt(capacity);
 
                                                     // Handle card click → SeatSelectionPage
                                                     busCard.setOnClickListener(v -> {
@@ -157,14 +162,15 @@ public class BusSearchPage extends AppCompatActivity {
                                                         i.putExtra("busId", busId);
                                                         i.putExtra("busName", busName);
                                                         i.putExtra("busType", type);
-                                                        i.putExtra("busFare", fare != null ? fare.intValue() : 0);
+                                                        i.putExtra("busFare", fare != null ? intFare : 0);
                                                         i.putExtra("busCategory", category);
                                                         i.putExtra("busDimension", dimension);
                                                         i.putExtra("busPlateNumber", plateNumber);
-                                                        i.putExtra("busCapacity", capacity);
+                                                        i.putExtra("busCapacity", capacityint);
                                                         i.putExtra("from", from);
                                                         i.putExtra("to", to);
                                                         i.putExtra("date", date);
+                                                        i.putExtra("scheduleId", scheduleId);
                                                         startActivity(i);
                                                     });
 

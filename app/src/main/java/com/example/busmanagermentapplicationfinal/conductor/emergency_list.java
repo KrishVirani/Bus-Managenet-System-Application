@@ -3,13 +3,13 @@ package com.example.busmanagermentapplicationfinal.conductor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.busmanagermentapplicationfinal.R;
-import com.example.busmanagermentapplicationfinal.conductor.create_emergency_alert;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +21,7 @@ import java.util.Locale;
 
 public class emergency_list extends ConductorBaseActivity {
 
+    ImageView bckbtn;
     Button btn_create_alert;
     TextView tv_alert_result;
     FirebaseFirestore firestore;
@@ -29,17 +30,19 @@ public class emergency_list extends ConductorBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_list);
-
+        setupDrawer(R.layout.activity_emergency_list);
+        toolbarTitle.setText("Emargency Alert");
         btn_create_alert = findViewById(R.id.btn_create_alert);
         tv_alert_result = findViewById(R.id.tv_alert_result);
-        toolbarTitle.setText("Emergency Alerts");
+        firestore = FirebaseFirestore.getInstance();
+//
+//        bckbtn = findViewById(R.id.backButton13);
+//        bckbtn.setOnClickListener(v -> finish());
+
         btn_create_alert.setOnClickListener(v -> {
             Intent intent = new Intent(emergency_list.this, create_emergency_alert.class);
             startActivity(intent);
         });
-
-        firestore = FirebaseFirestore.getInstance();
-        setupDrawer(R.layout.activity_emergency_list);
 
         loadEmergencyAlertsFromFirestore();
     }
@@ -78,7 +81,6 @@ public class emergency_list extends ConductorBaseActivity {
 
                                 builder.append("Message: ").append(message).append("\n")
                                         .append("DateTime: ").append(timeStr).append("\n")
-                                        .append("User: ").append(userName != null ? userName : "N/A").append("\n")
                                         .append("Bus: ").append(busName != null ? busName : "N/A").append("\n\n");
 
                                 // Set text only after last item

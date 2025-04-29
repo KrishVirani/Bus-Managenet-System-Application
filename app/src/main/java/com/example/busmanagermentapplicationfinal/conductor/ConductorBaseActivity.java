@@ -76,7 +76,23 @@ public class ConductorBaseActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         TextView navHeaderRole = headerView.findViewById(R.id.nav_header_role);
-        navHeaderRole.setText("Welcome Conductor\nKrish Virani");
+//        navHeaderRole.setText("Welcome Conductor\nKrish Virani");
+
+        db.collection("User").document("27mqfQb5ja8SoPHWxBfs").get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String firstName = documentSnapshot.getString("FirstName");
+                        String lastName = documentSnapshot.getString("LastName");
+                        navHeaderRole.setText("Welcome Conductor\n" + firstName + " " + lastName);
+                    } else {
+                        navHeaderRole.setText("Welcome Conductor\nUnknown");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    navHeaderRole.setText("Welcome Conductor\nError loading name");
+                    Log.e("FirestoreError", "Failed to fetch conductor name", e);
+                });
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);

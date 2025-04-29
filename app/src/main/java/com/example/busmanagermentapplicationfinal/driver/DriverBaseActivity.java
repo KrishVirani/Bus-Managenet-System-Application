@@ -2,6 +2,7 @@ package com.example.busmanagermentapplicationfinal.driver;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -20,12 +21,14 @@ import com.example.busmanagermentapplicationfinal.LoginActivity;
 import com.example.busmanagermentapplicationfinal.R;
 import com.example.busmanagermentapplicationfinal.conductor.ConductorDashbord;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DriverBaseActivity extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected NavigationView navigationView;
     protected Toolbar toolbar;
     TextView toolbarTitle;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,22 @@ public class DriverBaseActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         TextView navHeaderRole = headerView.findViewById(R.id.nav_header_role);
-        navHeaderRole.setText("Welcome Driver\nMahesh babu");
-
+//        navHeaderRole.setText("Welcome Driver\nMahesh babu");
+        db = FirebaseFirestore.getInstance();
+        db.collection("User").document("299qvqYeCwMIXqO7E5Fy").get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String firstName = documentSnapshot.getString("FirstName");
+                        String lastName = documentSnapshot.getString("LastName");
+                        navHeaderRole.setText("Welcome Driver\n" + firstName + " " + lastName);
+                    } else {
+                        navHeaderRole.setText("Welcome Driver\nUnknown");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    navHeaderRole.setText("Welcome Driver\nError loading name");
+                    Log.e("FirestoreError", "Failed to fetch conductor name", e);
+                });
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -70,7 +87,7 @@ public class DriverBaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Driver_Checkschedule.class));
             }
             else if (id == R.id.nav_Emargency_alert) {
-                startActivity(new Intent(this, driver_create_emergency_alert.class));
+//                startActivity(new Intent(this, driver_create_emergency_alert.class));
             }
             else if (id == R.id.nav_logout) {
                 startActivity(new Intent(this, LoginActivity.class));
